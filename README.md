@@ -27,3 +27,13 @@ Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需�
 在目录下执行命令`sudo docker build -t goswapifront .`构建镜像，指定镜像名称为goswapifront，构建成功后可以在docker的镜像列表中看到该镜像，最后用`docker run -d -p 8081:8081 goswapifront`在后台运行镜像，其中指定主机的8081端口映射到容器的8081端口，这样就成功启动了镜像。
 
 在整个项目中为了运行docker-compose，需要编写compose的约束文件，指定前端镜像的文件夹，只要改文件夹下包含dockerfile，这一部分就可以正确运行了。
+
+## Dockerfile 指令简介
+1. FROM 构建自定义镜像的基础镜像
+2. RUN  构建镜像过程中执行的命令， 每一个RUN 相当于新建一层存储
+3. COPY 复制系统文件到容器的特定目录
+4. CMD   运行容器时会执行的命令。  和RUN 的相同：都是执行命令。 不同：RUN 是用于构建镜像 CMD 是镜像变为容器时会运行的命令
+5. ENTRYPOINT  和cMD功能一样， 不过有了ENTRYPOINT CMD 的指令会变成ENTRYPOINT的参数
+6. ENV    设置环境变量， 就和windows 下设置java环境变量一样，可以在系统环境引用
+7. WORKDIR  设置工作目录，即在控制台中 cd 指令一样
+8. VOLUME    设置挂载卷，容器结束运行后，对挂载卷的内容会保存在宿主系统里面，而不是随着容器的结束，存储被销毁
